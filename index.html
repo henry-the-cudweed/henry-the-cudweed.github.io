@@ -14,14 +14,16 @@
     crossorigin=""/>
 </head>
 
+<body>
+<script type="text/javascript" src="justoneshape.js"></script>
+
  <!-- Make sure you put this AFTER Leaflet's CSS -->
  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
 
-
-
     <div id="map"></div>
+
 
 <script>
 
@@ -32,62 +34,27 @@ var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest
 }).addTo(map);
 
 
-/*var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken: 'pk.eyJ1IjoiaGVucnk0MTMiLCJhIjoiY2t1bWJ5a2FmM3IyNTJuazZkYXc4djMyMyJ9.8HruEppGiAk8p8PVPfpGXg'
-}).addTo(map);
-*/
-var polygon = L.polygon([
-                    [
-                        [
-                            37.9265451,
-                            -122.6724551
-                        ],
-                        [37.926573,
-                            -122.6724624
-                            
-                        ],
-                        [37.9266443,
-                            -122.6725117
-                            
-                        ],
-                        [37.9266726909,
-                            -122.6724369451
-                        ],
-                        [ 37.9266996664,
-                            -122.6723806188
-                    
-                        ],
-                        [37.9266928,
-                            -122.6723069
-                            
-                        ],
-                        [37.9265451,
-                            -122.6724551
-                            
-                        ]
-                    ]
-                ]).addTo(map).bindPopup('<iframe style="height: 100%" id="iframe" src="https://mgp-stewardship.neocities.org/CI-slider.html"></iframe>')
+
+
+function onEachFeature(feature, layer) {
+    // does this feature have a property named popupContent?
+    {
+        layer.bindPopup('capeIvyShape.features.properties.id <iframe style="height: 100%" id="iframe" src="slider-mg108283.html"></iframe>');
+    }
+}
+geojson = L.geoJson(capeIvyShape, {
+    onEachFeature: onEachFeature
+		
+}).addTo(map).bindPopup('<iframe style="height: 100%" id="iframe" src="slider-mg108283.html"></iframe>')
 .openPopup();
 
-/*polygon.bindPopup(
-    setContent(<embed type="text/html" src="https://mgp-stewardship.neocities.org/CI-slider.html" width="500" height="550">)
-   "whats up
-   
-   "
-    
-);
-*/
+
 
 
 
 </script>
 
-
+</body>
 
 <!---<iframe class="clickup-embed" src="https://sharing.clickup.com/t/h/1t3r8vh/2I54KKL7UVKUKBO" onwheel="" width="30%" height="700px" style="background: transparent; border: 1px solid #ccc;"></iframe>
 
