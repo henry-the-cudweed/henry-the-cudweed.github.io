@@ -1,0 +1,68 @@
+<head>
+    <style>
+        #map { height: 100%; }
+
+        .leaflet-popup-content {
+    max-width: 500px;
+    height: 500px;
+    ;
+}
+
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+</head>
+
+<body>
+<script type="text/javascript" src="mg155769-geojson.js"></script>
+
+ <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+
+    <div id="map"></div>
+
+
+
+
+<script>
+
+var map = L.map('map').setView([ 37.9265451,-122.6724551], 17);
+
+var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+}).addTo(map);
+
+
+
+
+function onEachFeature(feature, layer) {
+    // does this feature have a property named popupContent?
+    {
+        layer.bindPopup('capeIvyShape.features.properties.id <iframe style="height: 100%" id="iframe" src="slider-mg108283.html"></iframe>');
+    }
+}
+geojson = L.geoJson(capeIvyShape, {
+    onEachFeature: onEachFeature
+		
+}).addTo(map).bindPopup('<iframe style="height: 100%" id="iframe" src="mg155769-slider.html"></iframe>')
+.openPopup();
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+
+<!---<iframe class="clickup-embed" src="https://sharing.clickup.com/t/h/1t3r8vh/2I54KKL7UVKUKBO" onwheel="" width="30%" height="700px" style="background: transparent; border: 1px solid #ccc;"></iframe>
+
+
