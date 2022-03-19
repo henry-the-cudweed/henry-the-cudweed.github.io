@@ -112,7 +112,11 @@ var map2 = L.map('map2', { zoomControl: false}).setView([37.9265451, -122.672455
                  '</b><br />' + 'Species of Concern:  ' + props["Common Name"]
                  +
                  '</b><br />' + 'Scientific Name:  ' + props.Taxon
-                 
+                 +
+                 '</b><br />'
+                 +
+                '<a href="' + props.Slider + '"> Slider Closeup <a>' 
+              
                  
                  : 'Click on a plot');
         };
