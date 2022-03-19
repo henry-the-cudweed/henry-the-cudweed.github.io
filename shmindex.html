@@ -77,7 +77,7 @@
     <div style="width: 60%; float:left" id='map'></div>
     <div style="width: 40%; float:right" id='map2'></div>
 
-    <script type="text/javascript" src="shape.js"></script>
+    <script type="text/javascript" src="workshapes.js"></script>
 
     <script type="text/javascript">
 
@@ -104,10 +104,17 @@ var map2 = L.map('map2', { zoomControl: false}).setView([37.9265451, -122.672455
         };
 
         info.update = function (props) {
-            this._div.innerHTML = '<h4>US Population Density</h4>' + (props ?
+            this._div.innerHTML = '<h4>Habitat Restoration Site Info</h4>' + (props ?
                 '<b>' +
-                '<iframe style="height:100%" id="iframe" src="' + props.Slider + '"></iframe>' +
-                 '</b><br />' + 'Calflora ID:  ' + props.ID : 'Click on a plot');
+                '<iframe style="height:75%" style ="width:100%" id="iframe" src="' + props.Slider + '"></iframe>' +
+                 '</b><br />' + 'Calflora ID:  ' + props.ID
+                 +
+                 '</b><br />' + 'Species of Concern:  ' + props["Common Name"]
+                 +
+                 '</b><br />' + 'Scientific Name:  ' + props.Taxon
+                 
+                 
+                 : 'Click on a plot');
         };
 
         info.addTo(map2);
