@@ -1,0 +1,14 @@
+.sidebar {
+    width: 30%;
+    height: 500px;
+    position: absolute;
+    right: 0;
+    background-color: #c3c3c3;
+    font-family: "Arial", Arial, serif;
+    padding: 
+  }
+  
+  #map {
+    width: 70%;
+    height: 500px;
+  }
