@@ -26,7 +26,8 @@ var rotas = L.geoJSON(capeIvyShape, {
 function onEachFeature(feature, layer) {
   layer.on('click', function(e) {
     $(".slider").html(feature.properties.slider);
-   // $(".id").html(feature.properties.ID);
+    $(".common").html(feature.properties["Common Name"]);
+     $(".id").html(feature.properties.ID);
    // $(".common".html(feature.properties.["Common Name"]);
 
   });
