@@ -1,62 +1,4 @@
-<head>
-    <style>
-        #map { width: 70%;
-               height: 100%}
 
-        .leaflet-popup-content {
-    max-width: 500px;
-    height: 500px;
-    ;
-}
-    .sidebar {
-width: 30%;
-height: 100%;
-position: absolute;
-right: 0;
-background-color: #c3c3c3;
-font-family: "Arial", Arial, serif;
-padding: 
-}
-
-
-</style>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-    crossorigin=""/>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-
-</head>
-
-<body>
-<script type="text/javascript" src="justoneshape.js"></script>
-
- <!-- Make sure you put this AFTER Leaflet's CSS -->
- <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-   crossorigin=""></script>
-
-
-
-   <div>
-    <div class="sidebar">
-      -- Click the point on map to fill the data --
-      <br>
-      <b>Slider:</b><div class="slider"></div>
-      <b>Common Name:</b><div class="Common Name"></div>
-      <b>ID:</b><div class="ID"></div>
-    </div>
-
-    
-
-    <div id="map"></div>
-
-<script src="anothersidebarattempt.js"></script>
-        
-
-<!--
-<script>
 
 
 var map = L.map('map').setView([ 37.9265451,-122.6724551], 17);
@@ -107,19 +49,3 @@ function onEachFeature(feature, layer) {
 
 
 
-</script>
--->
-</body>
-
-<!---<iframe class="clickup-embed" src="https://sharing.clickup.com/t/h/1t3r8vh/2I54KKL7UVKUKBO" onwheel="" width="30%" height="700px" style="background: transparent; border: 1px solid #ccc;"></iframe>
-
-
-
-
-
-</body>
-
-</html>
-
-
-<!--look at this code https://codepen.io/dagmara223/pen/BVBGKG-->
