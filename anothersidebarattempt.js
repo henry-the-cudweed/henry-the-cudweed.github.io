@@ -1,6 +1,3 @@
-
-
-
 var map = L.map('map').setView([ 37.9265451,-122.6724551], 17);
 
 var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -17,7 +14,7 @@ var capeIvyShape = { "type": "FeatureCollection", "features": [
 
 ]}
 
-var rotas = L.geoJSON(capeIvyShape, {
+var mapShapes = L.geoJSON(capeIvyShape, {
   onEachFeature: onEachFeature
 }).addTo(map);
 
@@ -25,7 +22,7 @@ var rotas = L.geoJSON(capeIvyShape, {
 
 function onEachFeature(feature, layer) {
   layer.on('click', function(e) {
-    sliderPopup = '<iframe style="height:75%" style ="width:100%" id="iframe" src="' + feature.properties.slider + '"></iframe>'
+    sliderPopup = '<iframe style="height:60%" style ="width:100%" id="iframe" src="' + feature.properties.slider + '"></iframe>'
     $(".slider").html(sliderPopup);
     $(".common").html(feature.properties["Common Name"]);
      $(".id").html(feature.properties.ID);
