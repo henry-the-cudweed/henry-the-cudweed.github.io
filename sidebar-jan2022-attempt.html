@@ -1,0 +1,161 @@
+<head>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+ <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+ <link rel="stylesheet" href="node_modules/leaflet-sidebar-v2/css/leaflet-sidebar.css" /></link>
+ <script src="node_modules/leaflet-sidebar-v2/js/leaflet-sidebar.js"></script>
+</head>
+
+
+<!--from codepen, to style the sidebar-->
+<style> 
+    html, body, #map {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        margin-left: 10%;
+        padding: 0;
+      }
+      #sidebar {
+        position: absolute;
+        width: 30%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+      .sidebarElement {
+        padding: 6px;
+        display: table;
+        width: 95%;
+      }
+      .infoSidebarElement {
+        display: table-cell;
+        cursor: pointer;
+        width: 90%;
+      }
+      .removeSidebarElement {
+        display: table-cell;
+        text-align: right;
+        cursor: pointer;
+      }
+  
+</style>
+<body>
+<!--SIDEBAR CREATION-->
+    <div id="sidebar" class="leaflet-sidebar collapsed">
+
+    
+
+        
+
+        <!-- panel content -->
+        <div class="leaflet-sidebar-content">
+            <div class="leaflet-sidebar-pane" id="home">
+                <h1 class="leaflet-sidebar-header">
+                    sidebar-v2
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+
+                <p>A responsive sidebar for the mapping library <a href="https://leafletjs.com/">Leaflet</a>.</p>
+                <p>Compatible with version 0.7 and 1.x (tested up to 1.6.0)</p>
+                <p><b>Select the other panes for a showcase of each feature.</b></p>
+
+                <h2>More examples</h2>
+                <ul>
+                    <li><a href="./position-right.html">Right aligned</a></li>
+                    <li><a href="./halfheight.html">The sidebar adapts to map container size</a></li>
+                    <li><a href="./leaflet-latest.html">Proof that it works with the latest leaflet version (if not, please report it!)</a></li>
+                    <li><a href="./leaflet-0.7.html">Proof that it works with leaflet 0.7</a></li>
+                    <p>
+                        
+                    </p>
+                </ul>
+
+            </div>
+
+            <div class="leaflet-sidebar-pane" id="autopan">
+                <h1 class="leaflet-sidebar-header">
+                    autopan
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <p>
+                    <code>Leaflet.control.sidebar({ autopan: true })</code>
+                    makes sure that the map center always stays visible.
+                </p>
+                <p>
+                    The autopan behviour is responsive as well.
+                    Try opening and closing the sidebar from this pane!
+                </p>
+               
+            </div>
+
+            <div class="leaflet-sidebar-pane" id="messages">
+                <h1 class="leaflet-sidebar-header">Messages<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            </div>
+        </div>
+    </div>
+
+<!--MAP CREATION-->
+<div style="width: 100%; height: 100%; float:left" id='map'></div>
+
+</body>
+
+<script type="text/javascript" src="workshapes.js"></script>
+
+<script>
+    var map = L.map('map').setView([37.9265451, -122.6724551], 17);
+
+    var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    }).addTo(map);
+
+    markerLayer = L.layerGroup([]).addTo(map);
+
+    geojson = L.geoJson(capeIvyShape).addTo(map);
+
+    function createMarker(coords, title, info, image, source) {
+        var marker, content;
+   ///can i create a create shape function similar to this create marker function?
+   
+   function createShape(slider, infestedArea, numberOfPlants, date, locationDescription, commonName, percentCover, taxon, grossArea, phenology, observer, distribution, habitat, id, notes, geometry, coordinates, type){
+    var marker2, content2;
+   }
+
+    content = '<b><font size="6">' + title + '</font></b><br/>' + info + '<br> <img src="' + image + '"><a href="' + source + '" target="_blank"><button>Source</button></a>'
+    marker = L.marker(coords).addTo(markerLayer);
+
+    marker.bindPopup(content);
+
+    marker.on('click', function(evt) {
+        var id = L.Util.stamp(evt.target);
+        if (document.getElementById(id) != null) return; 
+        var sidebarElement, infoPart, removePart;
+        sidebarElement = L.DomUtil.create('div', 'sidebarElement', document.getElementById('sidebar'));
+        sidebarElement.id = id;
+        infoPart = L.DomUtil.create('div', 'infoSidebarElement', sidebarElement);
+        infoPart.innerHTML = content;
+
+    L.DomEvent.on(infoPart, 'click', function(evt) {
+        var marker = markerLayer.getLayer(this.id);
+        marker.closePopup();
+        map.panTo(marker.getLatLng());
+        marker.bounce(3);
+    }, sidebarElement);
+        removePart = L.DomUtil.create('div', 'removeSidebarElement', sidebarElement);
+        removePart.innerHTML = 'Remove';
+        L.DomEvent.on(removePart, 'click', function(evt) {
+        markerLayer.getLayer(this.id).closePopup();
+        this.parentNode.removeChild(this);
+          }, sidebarElement);
+        });
+      }
+
+    createMarker([37.9265451, -122.6724551], 'Title 1', 'Info 1', '', ''); 
+    createMarker([37.9265499, -122.6724566], 'Title 2', 'Info 2', '', '');
+    createMarker([ { "type": "Feature", "properties": 
+    { "Slider": "mg155769-slider.html", "Location Description":"South side of volunteer canyon Creek, from the two willows on the bank to the arching bay tree","Common Name":"Cape ivy","Taxon":"Delairea odorata","Observer":"Henry Inman","Access":"unpublished","ID":"mg155769","Date":"2022-02-09 12:34:32.0"}, "geometry": {"coordinates":[[[-122.6726599,37.9264891],[-122.6726112,37.9264852],[-122.6725809,37.9265296],[-122.6725778,37.9265544],[-122.6725393,37.9265349],[-122.6725174,37.9265094],[-122.6725652,37.9264779],[-122.6726359,37.9264118],[-122.6726643,37.9264333],[-122.6726599,37.9264891]]],"type":"Polygon"}},
+])
+
+    
+
+</script>
